@@ -1,0 +1,7 @@
+move title to left
+weird border on some faded numbers
+square of death 2x2 corner of same color = 50/50 guess
+simple how to play
+fill out heart space
+save difficulty setting
+golden heart if no health lost on hard
