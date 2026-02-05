@@ -1,9 +1,16 @@
 # 💎 Gem Guesser - Deluxe Edition
 
-A logic puzzle game where you hunt for hidden gems using colorful clues.<br><br>
-<img width="965" height="895" alt="image" src="https://github.com/user-attachments/assets/0e07de6a-fcf6-4998-a0ed-b3292ec55cf6" />
+<p align="center">A logic puzzle game where you hunt for hidden gems using colorful clues.<br><br></p>
 
-**[🎮 Play Now](https://wngui.github.io/GemGuesser/)**
+<p align="center">
+<img width="482" height="447" alt="image" src="https://github.com/user-attachments/assets/0e07de6a-fcf6-4998-a0ed-b3292ec55cf6" />
+</p>
+
+<p align="center">
+  <a href="https://wngui.github.io/GemGuesser/">
+    <img src="https://img.shields.io/badge/🎮_PLAY_NOW-4CAF50?style=for-the-badge&labelColor=2E7D32&color=4CAF50" alt="Play Now" />
+  </a>
+</p>
 
 ## How to Play
 
@@ -21,8 +28,8 @@ Built with pure HTML5, CSS3, and vanilla JavaScript - no frameworks needed!
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU GENERAL PUBLIC License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Happy gem hunting!** 💎✨
+**Happy hunting!** 💎✨
