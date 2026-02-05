@@ -28,7 +28,7 @@ Built with pure HTML5, CSS3, and vanilla JavaScript - no frameworks needed!
 
 ## License
 
-This project is licensed under the GNU GENERAL PUBLIC License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL-3.0 license - see the [LICENSE](LICENSE) file for details.
 
 ---
 
