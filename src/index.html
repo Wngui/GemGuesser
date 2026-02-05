@@ -10,7 +10,7 @@
     <div class="container">
         <div class="title-wrapper">
             <h1>Gem Guesser</h1>
-            <h2 class="deluxe-badge">Deluxe Edition 💎</h2>
+            <h2 class="deluxe-badge">Deluxe Edition <span class="secret-diamond">💎</span></h2>
         </div>
         <div class="game-container">
             <div class="grid-with-rows">
@@ -23,6 +23,10 @@
                                     <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                         <stop offset="0%" style="stop-color:#ff4466;stop-opacity:1" />
                                         <stop offset="100%" style="stop-color:#cc0033;stop-opacity:1" />
+                                    </linearGradient>
+                                    <linearGradient id="goldenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
                                     </linearGradient>
                                     <clipPath id="heartClip">
                                         <path d="M50,90 C50,90 10,60 10,40 C10,25 20,15 32.5,15 C40,15 45,20 50,27.5 C55,20 60,15 67.5,15 C80,15 90,25 90,40 C90,60 50,90 50,90 Z"/>
@@ -56,10 +60,25 @@
                     </div>
                 </div>
                 <div id="totalColors" class="total-colors"></div>
+                <div id="help" class="total-colors">
+                    <div class="help-button help-button-wrapper">
+                        Help
+                        <div class="help-popover">
+                            <h3>How to Play</h3>
+                            <p>🎯 <strong>Objective:</strong> Find all the hidden gems!</p>
+                            <p>🎨 <strong>Select a color</strong> from the right panel and click cells you think contain that gem color.</p>
+                            <p>📱 <strong>Use the numbers</strong> on rows and columns as hints - they show how many gems of each color are in that line.</p>
+                            <p>❤️ <strong>Lives:</strong> You have 3 lives. Wrong guesses cost you a life!</p>
+                            <p>💎 <strong>Win</strong> by revealing all gems without losing all lives.</p>
+                            <p>💡 <strong>Right-click</strong> to place ghost marks as reminders.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!--<button class="debug-win-btn" onclick="debugWin()">🎉 Debug Win</button>-->
+    <!--<button class="debug-win-btn" onclick="debugGoldenHeart()" style="bottom: 70px;">💛 Golden Heart</button>-->
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
     <script src="script.js"></script>
 </body>

@@ -23,6 +23,7 @@ let remainingColors = {};
 let initialColorOrder = []; // Store initial color ordering
 let lives = 3; // Track remaining lives
 let ghostMarks = {}; // Track ghost marks: {index: color}
+let diamondClickCount = 0; // Track diamond clicks for secret fireworks
 
 // Function to explode heart and make gems fly
 function explodeHeartAndGems() {
@@ -100,6 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Setup difficulty buttons
     setupDifficultyButtons();
     
+    // Setup secret diamond fireworks
+    setupDiamondFireworks();
+    
+    // Load saved difficulty
+    loadDifficulty();
+    
     // Start the first game
     startNewGame();
 });
@@ -113,6 +120,19 @@ function setupDifficultyButtons() {
             setDifficulty(difficulty);
         });
     });
+}
+
+// Function to setup secret diamond fireworks
+function setupDiamondFireworks() {
+    const secretDiamond = document.querySelector('.secret-diamond');
+    if (secretDiamond) {
+        secretDiamond.addEventListener('click', function() {
+            diamondClickCount++;
+            if (diamondClickCount % 3 === 0) {
+                launchSecretFireworks();
+            }
+        });
+    }
 }
 
 // Function to set difficulty and start new game
@@ -145,13 +165,54 @@ function setDifficulty(difficulty) {
         }
     });
     
+    // Save difficulty to localStorage
+    localStorage.setItem('gemGuesserDifficulty', difficulty);
+    
     // Start new game with new difficulty
     startNewGame();
 }
 
+// Function to load saved difficulty
+function loadDifficulty() {
+    const savedDifficulty = localStorage.getItem('gemGuesserDifficulty');
+    if (savedDifficulty) {
+        setDifficultyWithoutRestart(savedDifficulty);
+    }
+}
+
+// Function to set difficulty without restarting game (for loading)
+function setDifficultyWithoutRestart(difficulty) {
+    // Update current difficulty
+    switch(difficulty) {
+        case 'easy':
+            currentDifficulty = DIFFICULTY_EASY;
+            break;
+        case 'medium':
+            currentDifficulty = DIFFICULTY_MEDIUM;
+            break;
+        case 'hard':
+            currentDifficulty = DIFFICULTY_HARD;
+            break;
+        default:
+            currentDifficulty = DIFFICULTY_EASY;
+    }
+    
+    // Update colored cells count
+    COLORED_CELLS_COUNT = Math.floor(TOTAL_CELLS * currentDifficulty);
+    
+    // Update button states
+    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+    difficultyButtons.forEach(btn => {
+        if (btn.getAttribute('data-difficulty') === difficulty) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
 // Function to start a new game
 function startNewGame() {
-    console.log('Starting new game...');
     lives = 3; // Reset lives
     
     // Reset heart
@@ -235,8 +296,6 @@ function generateGameGrid() {
         gameGrid[position] = selectedColor;
         remainingColors[selectedColor] = (remainingColors[selectedColor] || 0) + 1;
     });
-
-    console.log(`Generated grid with ${COLORED_CELLS_COUNT} colored cells out of ${TOTAL_CELLS} total cells`);
 }
 
 // Function to select a color weighted by current distribution (favoring less-used colors)
@@ -255,22 +314,17 @@ function selectWeightedColor() {
         totalWeight += weight;
     });
 
-    console.log('Color weights:', weights.map(w => `${w.color}: ${w.weight} (count: ${remainingColors[w.color] || 0})`).join(', '));
-
     // Select random color based on weights
     let random = Math.random() * totalWeight;
-    console.log(`Random value: ${random.toFixed(2)} out of ${totalWeight.toFixed(2)}`);
 
     for (let i = 0; i < weights.length; i++) {
         random -= weights[i].weight;
         if (random <= 0) {
-            console.log(`Selected color: ${weights[i].color}`);
             return weights[i].color;
         }
     }
 
     // Fallback (should never reach here)
-    console.warn('Fallback color selection used!');
     return COLORS[0];
 }
 
@@ -376,8 +430,6 @@ function renderGrid() {
         
         gridElement.appendChild(cell);
     }
-    
-    console.log('Grid rendered successfully');
 }
 
 // Function to calculate color counts for rows and columns
@@ -502,8 +554,6 @@ function renderCounts() {
         
         rowCountsElement.appendChild(countDisplay);
     }
-    
-    console.log('Counts rendered successfully');
     
     // Match button dimensions to row counts after rendering
     matchButtonDimensions();
@@ -738,8 +788,6 @@ function handleCellClick(index) {
             
             // Check if game is won
             checkVictory();
-            
-            console.log(`Correct! Revealed ${color} at position ${index}`);
         } else {
             // Incorrect guess - lose a life and shake the board
             loseLife();
@@ -751,8 +799,6 @@ function handleCellClick(index) {
             setTimeout(() => {
                 gridWithRows.classList.remove('shake');
             }, 500);
-            
-            console.log(`Wrong! Cell is ${color}, you guessed ${selectedColor}`);
         }
     } else if (!color) {
         // Clicking on empty cell - lose a life and shake the board
@@ -765,8 +811,6 @@ function handleCellClick(index) {
         setTimeout(() => {
             gridWithRows.classList.remove('shake');
         }, 500);
-        
-        console.log(`Wrong! Cell is empty`);
     }
 }
 
@@ -806,7 +850,13 @@ function checkVictory() {
 
 // Function to celebrate victory
 function celebrateVictory() {
-    console.log('🎉 Victory!');
+    // Add golden heart effect if won on hard difficulty with full lives
+    if (currentDifficulty === DIFFICULTY_HARD && lives === 3) {
+        const heartContainer = document.getElementById('heartContainer');
+        if (heartContainer) {
+            heartContainer.classList.add('golden');
+        }
+    }
     
     // Add sparkle and pulsate to all revealed cells
     const revealedCells = gridElement.querySelectorAll('.revealed');
@@ -950,6 +1000,77 @@ function createContinuousDiamondRain() {
     }, 500);
 }
 
+// Function to launch secret fireworks (from diamond easter egg)
+function launchSecretFireworks() {
+    const container = document.querySelector('.container');
+    let fireworksContainer = document.querySelector('.secret-fireworks-container');
+    
+    if (!fireworksContainer) {
+        fireworksContainer = document.createElement('div');
+        fireworksContainer.className = 'fireworks-container secret-fireworks-container';
+        container.appendChild(fireworksContainer);
+    }
+    
+    // Initialize fireworks.js
+    const tempFireworks = new Fireworks.default(fireworksContainer, {
+        autoresize: true,
+        opacity: 0.5,
+        acceleration: 1.05,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 90,
+        traceLength: 3,
+        traceSpeed: 10,
+        explosion: 5,
+        intensity: 0.5,
+        flickering: 50,
+        lineStyle: 'round',
+        hue: {
+            min: 0,
+            max: 360
+        },
+        delay: {
+            min: 0,
+            max: 0
+        },
+        rocketsPoint: {
+            min: 50,
+            max: 50
+        },
+        lineWidth: {
+            explosion: {
+                min: 1,
+                max: 3
+            },
+            trace: {
+                min: 1,
+                max: 2
+            }
+        },
+        brightness: {
+            min: 50,
+            max: 80
+        },
+        decay: {
+            min: 0.015,
+            max: 0.03
+        },
+        mouse: {
+            click: false,
+            move: false,
+            max: 1
+        }
+    });
+    
+    tempFireworks.start();
+    
+    // Stop after 3 seconds
+    setTimeout(() => {
+        tempFireworks.stop();
+        fireworksContainer.remove();
+    }, 3000);
+}
+
 // Function to stop continuous animations
 function stopContinuousAnimations() {
     if (fireworksInstance) {
@@ -984,9 +1105,25 @@ function debugWin() {
     COLORS.forEach(color => {
         remainingColors[color] = 0;
     });
-    
+
     renderCounts();
     celebrateVictory();
+}
+
+// Debug function to test golden heart
+function debugGoldenHeart() {
+    currentDifficulty = DIFFICULTY_HARD;
+    lives = 3;
+    const heartContainer = document.getElementById('heartContainer');
+    const livesText = document.getElementById('livesText');
+    
+    if (livesText) {
+        livesText.textContent = '3';
+    }
+    
+    if (heartContainer) {
+        heartContainer.className = 'heart-container lives-3 golden';
+    }
 }
 
 // Expose some functions to global scope for debugging

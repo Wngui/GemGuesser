@@ -1,109 +1,27 @@
 # 💎 Gem Guesser - Deluxe Edition
 
-A captivating logic puzzle game where you deduce the positions of hidden gems using color clues. Think of it as a colorful twist on Minesweeper!
+A logic puzzle game where you hunt for hidden gems using colorful clues.
 
-[![Deploy to GitHub Pages](https://github.com/yourusername/GemGuesser/actions/workflows/deploy.yml/badge.svg)](https://github.com/yourusername/GemGuesser/actions/workflows/deploy.yml)
+**[🎮 Play Now](https://wngui.github.io/GemGuesser/)**
 
-## 🎮 Play Now
+## How to Play
 
-**[Play Gem Guesser](https://yourusername.github.io/GemGuesser/)**
+Find all the hidden gems without losing your lives!
 
-## 🎯 How to Play
+1. **Pick a color** from the panel on the right
+2. **Click on cells** where you think that colored gem is hiding
+3. **Check the numbers** along the rows and columns - they tell you how many gems of each color are in that line
+4. **Watch your lives!** You start with 3 hearts. Each wrong guess costs you one, so choose wisely
+5. **Pro tip:** Right-click on cells to drop ghost markers as reminders while you're solving
 
-1. **Choose Your Difficulty**
-   - **Easy**: 80% of the grid contains gems
-   - **Medium**: 65% of the grid contains gems
-   - **Hard**: 50% of the grid contains gems
+## Tech Stack
 
-2. **Use the Clues**
-   - Numbers on the **top** show how many gems of each color are in that column
-   - Numbers on the **left** show how many gems of each color are in that row
-   - The **right panel** shows the total count for each gem color
+Built with pure HTML5, CSS3, and vanilla JavaScript - no frameworks needed!
 
-3. **Make Your Guesses**
-   - Select a color from the right panel
-   - Click on a cell to mark it as that color
-   - Right-click to place a "ghost mark" (tentative guess)
-   - You have **3 lives** ❤️ - lose one for each wrong guess
-
-4. **Win the Game**
-   - Correctly identify all gem positions
-   - Enjoy the fireworks celebration! 🎆
-
-## ✨ Features
-
-- **Three Difficulty Levels**: From casual to challenging
-- **Beautiful UI**: Smooth animations and particle effects
-- **Lives System**: Visual heart indicator with liquid fill
-- **Ghost Marks**: Mark uncertain cells with semi-transparent colors
-- **Responsive Design**: Works on desktop and mobile
-- **Victory Celebration**: Fireworks display when you win
-
-## 🛠️ Technologies Used
-
-- Pure HTML5, CSS3, and JavaScript
-- No frameworks or dependencies (except fireworks-js for celebrations)
-- Responsive grid layout
-- CSS animations and transitions
-- SVG graphics for the heart indicator
-
-## 🚀 Local Development
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/GemGuesser.git
-   cd GemGuesser
-   ```
-
-2. Open `src/index.html` in your browser or use a local server:
-   ```bash
-   # Using Python 3
-   cd src
-   python -m http.server 8000
-   
-   # Using Node.js http-server
-   npx http-server src -p 8000
-   ```
-
-3. Navigate to `http://localhost:8000`
-
-## 📁 Project Structure
-
-```
-GemGuesser/
-├── src/
-│   ├── index.html      # Main HTML file
-│   ├── script.js       # Game logic
-│   └── style.css       # Styling and animations
-├── .github/
-│   └── workflows/
-│       └── deploy.yml  # GitHub Pages deployment
-├── README.md
-└── LICENSE
-```
-
-## 🎨 Game Design
-
-- **Colors**: Red, Blue, Green, Purple, Orange gems
-- **Grid Size**: 8x8 (64 cells)
-- **Smart Clue System**: Row and column counters help you deduce positions
-- **Progressive Difficulty**: Fewer gems = harder puzzles
-
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Submit pull requests
-
-## 👨‍💻 Author
-
-Created with ❤️ for puzzle game enthusiasts
-
 ---
 
-**Enjoy the game and happy gem hunting!** 💎✨
+**Happy gem hunting!** 💎✨
