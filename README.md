@@ -1,6 +1,7 @@
 # 💎 Gem Guesser - Deluxe Edition
 
-A logic puzzle game where you hunt for hidden gems using colorful clues.
+A logic puzzle game where you hunt for hidden gems using colorful clues.<br><br>
+<img width="965" height="895" alt="image" src="https://github.com/user-attachments/assets/0e07de6a-fcf6-4998-a0ed-b3292ec55cf6" />
 
 **[🎮 Play Now](https://wngui.github.io/GemGuesser/)**
 
